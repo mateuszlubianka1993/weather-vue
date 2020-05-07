@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    
+    <CurrentDay/>
   </div>
 </template>
 
 <script>
+import CurrentDay from './components/CurrentDay';
 
 export default {
   name: 'App',
   components: {
-    
+    CurrentDay
   }
 }
 </script>
