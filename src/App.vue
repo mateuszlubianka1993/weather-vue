@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <SearchBar/>
     <CurrentDay/>
   </div>
 </template>
 
 <script>
 import CurrentDay from './components/CurrentDay';
+import SearchBar from './components/SearchBar';
 
 export default {
   name: 'App',
   components: {
-    CurrentDay
+    CurrentDay,
+    SearchBar
   }
 }
 </script>
