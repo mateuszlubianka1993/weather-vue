@@ -1,8 +1,8 @@
 <template>
-  <div class="current-day d-flex align-items-center">
+  <div class="current-day d-flex align-items-center" v-bind:class = "(timeOfDay === 'day') ? 'day' : 'night'">
     <div class="weather-container container">
       <div class="weather-icon text-center">
-        <i class="fas fa-cloud-sun"></i>
+        <i v-if="timeOfDay === 'day'" class="fas fa-cloud-sun"></i>  <i v-else class="fas fa-cloud-moon"></i>
       </div>
       <div class="weather-data container">
         <div class="row">
@@ -37,26 +37,54 @@
 
 <script>
 export default {
-  name: 'CurrentDay'
+  name: 'CurrentDay',
+  data: function() {
+    return {
+      timeOfDay: 'day'
+    }
+  },
+  methods: {
+    dayOrNight() {
+      const time = new Date().getHours();
+      // const time = 23;
+
+      if(time >= 18 || time < 5) {
+
+        this.timeOfDay = 'night'
+      } else {
+
+        this.timeOfDay = 'day'
+      }
+    }
+  },
+  created: function () {
+    this.dayOrNight();
+  }
 }
 </script>
 
 <style scoped>
   .weather-container{
     padding: 7px;
-    /* background-color: red; */
   }
   .weather-icon {
     margin-bottom: 25px;
   }
   .current-day {
-    background-color: green;
-    /* Zdjęcie autorstwa Darius Krause z Pexels */
-    background-image: url('../assets/day.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
+  }
+  .night {
+    /* Zdjęcie autorstwa eberhard grossgasteiger z Pexels */
+    background-image: url('../assets/night.jpg');
+    color: #fafffd;
+  }
+  .day {
+    /* Zdjęcie autorstwa Disha Sheta z Pexels */
+    background-image: url('../assets/day.jpg');
+    color: #fafffd;
   }
   .weather-icon {
     font-size: 6rem;
@@ -66,10 +94,8 @@ export default {
   }
   .data-box {
     padding: 5px;
-    /* border: 1px solid black; */
   }
   .data-box {
-    /* font-size: 0.9rem; */
   }
   .temperature {
     font-size: 2.5rem;
@@ -79,6 +105,6 @@ export default {
     padding-bottom: 2px;
   }
   .location-box:first-of-type {
-    border-bottom: 2px solid #2c3e50;
+    border-bottom: 2px solid #d1ab13;
   }
 </style>
