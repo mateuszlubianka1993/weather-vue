@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <SearchBar/>
-    <CurrentDay/>
+    <SearchBar @dataFetched="getWeatherData" />
+    <CurrentDay :weather="weather" :exist="exist" />
     <Footer/>
   </div>
 </template>
@@ -13,6 +13,19 @@ import Footer from './components/Footer';
 
 export default {
   name: 'App',
+  data: function() {
+    return {
+      weather: {},
+      exist: false
+    }
+  },
+  methods: {
+    getWeatherData(data) {
+      console.log(data)
+      this.weather = data;
+      this.exist = true;
+    }
+  },
   components: {
     CurrentDay,
     SearchBar,

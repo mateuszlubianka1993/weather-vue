@@ -1,36 +1,41 @@
 <template>
   <div class="current-day d-flex align-items-center" v-bind:class = "(timeOfDay === 'day') ? 'day' : 'night'">
-    <div class="weather-container container">
+    <div class="weather-container container" v-if="exist">
       <div class="weather-icon text-center">
         <i v-if="timeOfDay === 'day'" class="fas fa-cloud-sun"></i>  <i v-else class="fas fa-cloud-moon"></i>
       </div>
       <div class="weather-data container">
         <div class="row">
           <div class="data-box temperature">
-            16&ordm;C
+            {{Math.round(weather.list[0].main.temp)}}&ordm;C
           </div>
           <div class="data-box d-flex flex-column justify-content-between">
-            <div class="wind text-justify">112km/h</div>
-            <div class="humidity text-justify">15%</div>
+            <div class="wind text-justify">{{weather.list[0].wind.speed}}km/h</div>
+            <div class="humidity text-justify">{{weather.list[0].main.humidity}}%</div>
           </div>
           <div class="data-box description d-flex align-items-end">
-            <span>Sunny</span>
+            <span>{{weather.list[0].weather[0].main}}</span>
           </div>
         </div>
       </div>
       <div class="location-data container text-justify">
         <div class="location-box">
-          <i class="fas fa-map-marker-alt"></i> London
+          <i class="fas fa-map-marker-alt"></i> {{weather.city.name}}
         </div>
         <div class="location-box d-flex justify-content-between">
           <div class="date">
-            THU / May 07
+            {{new Date().toDateString()}}
           </div>
           <div class="time">
-            17:09
+            {{new Date().getHours()}}:{{new Date().getMinutes()}}
           </div>
         </div>
       </div>
+    </div>
+    <div class="weather-container container" v-else>
+      <h2>Hello!</h2>
+      <h3>Search weather data by city name.</h3>
+      <h2><i class="fas fa-search"></i></h2>
     </div>
   </div>
 </template>
@@ -38,6 +43,7 @@
 <script>
 export default {
   name: 'CurrentDay',
+  props: ['weather', 'exist'],
   data: function() {
     return {
       timeOfDay: 'day'
