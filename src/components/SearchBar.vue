@@ -32,6 +32,11 @@
 <script>
 export default {
   name: "SearchBar",
+  data: function() {
+    return {
+      weather: {}
+    }
+  }
 };
 </script>
 
