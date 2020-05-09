@@ -2,7 +2,7 @@
   <div id="app">
     <SearchBar @dataFetched="getWeatherData" />
     <CurrentDay :weather="weather" :exist="exist" />
-    <Footer/>
+    <Footer :days="nextDays" :exist="exist" />
   </div>
 </template>
 
@@ -16,14 +16,32 @@ export default {
   data: function() {
     return {
       weather: {},
-      exist: false
+      exist: false,
+      daysOfWeek: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      nextDays: []
     }
   },
   methods: {
     getWeatherData(data) {
-      console.log(data)
+      // console.log(data)
       this.weather = data;
       this.exist = true;
+
+      let days = [];
+      let number = new Date().getDay();
+
+      for(let i=1; i<=4; i++) {
+        number++;
+        if(number >= 7) {
+          number = 0;
+        }
+
+        days.push({
+          name: this.daysOfWeek[number],
+          data: this.weather.list[i*8]
+        })
+      }
+      this.nextDays = days;
     }
   },
   components: {

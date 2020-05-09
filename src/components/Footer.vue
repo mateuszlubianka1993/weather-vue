@@ -1,20 +1,26 @@
 <template>
   <!-- Footer -->
   <footer class="page-footer font-small rgba-black-strong fixed-bottom">
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">
-      © 2020 Copyright:
-      <a href=""> Mateusz</a>
+    <div class="container-fluid">
+      <div class="row" v-if="exist">
+        <NextDay class="next-day col-3" v-for="(d, index) in days" :key="index" :day="d" />
+      </div>
     </div>
-    <!-- Copyright -->
   </footer>
-  <!-- Footer -->
 </template>
 
 <script>
+import NextDay from './NextDay';
+
 export default {
   name: "Footer",
+  props: ["days", "exist"],
+  components: {
+    NextDay
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
