@@ -38,19 +38,29 @@ export default {
   },
   methods: {
     getData() {
-
-      this.$http.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=26df753807a025c66570efc01c24fb39&units=metric`)
-        .then( response => {
+      this.$http
+        .get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=26df753807a025c66570efc01c24fb39&units=metric`
+        )
+        .then((response) => {
           return response.json();
         })
-        .then(data => {
+        .then((data) => {
           this.weather = data;
-          this.$emit('dataFetched', this.weather);
-        })
+          this.$emit("dataFetched", this.weather);
+        });
       this.city = "";
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-control-sm {
+  color: white;
+}
+input.form-control-sm[type="text"]:focus:not([readonly]) {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+</style>
