@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     getWeatherData(data) {
-      // console.log(data)
+
       this.weather = data;
       this.exist = true;
 
